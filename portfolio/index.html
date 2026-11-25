@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seungmo Kim — Portfolio</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ───── 인트로: ? → 낚싯바늘 → ! 물고기 ───── -->
+<div id="intro" aria-label="인트로 — 클릭하면 시작">
+  <!-- 인트로 배경 (나갈 때 서서히 사라짐, 바늘·물고기는 그 위로 올라감) -->
+  <div class="intro-curtain" id="introCurtain"></div>
+  <button class="intro-skip" id="introSkip">SKIP →</button>
+  <svg viewBox="0 0 400 560" aria-hidden="true">
+    <defs>
+      <mask id="waterMask" maskUnits="userSpaceOnUse" x="-3000" y="-3000" width="6400" height="7000">
+        <rect x="-3000" y="-3000" width="6400" height="3420" fill="#fff"/>
+        <rect id="maskDeep" x="-3000" y="420" width="6400" height="3000" fill="#4a4a4a"/>
+      </mask>
+      <clipPath id="underClip"><rect x="-3000" y="422" width="6400" height="3000"/></clipPath>
+      <clipPath id="bodyClip"><path d="M-14 12 Q-14 0 0 0 Q14 0 14 12 L6.5 58 L12 69 L0 63.5 L-12 69 L-6.5 58 Z"/></clipPath>
+    </defs>
+
+
+    <!-- 수면 -->
+    <line id="water" x1="-600" y1="420" x2="1000" y2="420" stroke="#2563eb" stroke-opacity=".28" stroke-width="1.5"/>
+
+    <g mask="url(#waterMask)">
+      <!-- 물속 느낌표 물고기 떼 (intro.js에서 생성) — 바늘 물고기와 같은 물속 톤 -->
+      <g id="school" clip-path="url(#underClip)" opacity="0"></g>
+      <g id="sway">
+        <g id="rig">
+          <line id="fline" x1="200" y1="241" x2="200" y2="-1300" stroke="#2563eb" stroke-width="2" stroke-dasharray="1500" stroke-dashoffset="1500"/>
+          
+          <g id="qwrap">
+            <g id="qm" class="o-center">
+              <path id="qcurve" d="M160 250 A40 40 0 1 1 200 290 L200 312" fill="none" stroke="#333" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle id="qdot" cx="200" cy="340" r="9" fill="#333"/>
+            </g>
+          </g>
+          <g id="fish"><g transform="translate(200 340)"><g class="wig"><path d="M-14 12 Q-14 0 0 0 Q14 0 14 12 L6.5 58 L12 69 L0 63.5 L-12 69 L-6.5 58 Z" fill="#2b2b2b"/><circle cx="4.5" cy="12" r="2.4" fill="#f6f6f4"/><circle cx="0" cy="86" r="8.5" fill="#2b2b2b"/></g></g></g>
+          <polygon id="barb" points="240,314 226,345 254,345" fill="#2563eb"/>
+          
+        </g>
+      </g>
+    </g>
+
+    <!-- 물방울 -->
+    <g id="splash">
+      <circle cx="240" cy="420" r="3" fill="#2563eb"/><circle cx="240" cy="420" r="2.2" fill="#2563eb"/>
+      <circle cx="240" cy="420" r="3.4" fill="#2563eb"/><circle cx="240" cy="420" r="2" fill="#2563eb"/>
+      <circle cx="240" cy="420" r="2.6" fill="#2563eb"/>
+    </g>
+  </svg>
+
+  <div class="intro-text">
+    <h2 id="introTitle">Look Differently, Catch New Ideas.</h2>
+    <p id="introSub">문제를 다르게 바라보면, 새로운 아이디어를 낚을 수 있습니다.</p>
+  </div>
+  <!-- 큰 물고기를 낚아 올린 뒤 나오는 두 번째 문구 -->
+  <div class="intro-text second">
+    <h2 id="introTitle2">Today's Catch, Tomorrow's Bait.</h2>
+    <p id="introSub2">그렇게 낚아올린 아이디어는 더 좋은 아이디어를 위한 미끼가 되기도 합니다.</p>
+  </div>
+  <p class="intro-hint" id="introHint">CLICK TO ENTER</p>
+</div>
+
+
+<div class="app folded" id="app">   <!-- 처음엔 프로필 수납 -->
+
+  <!-- ───── 왼쪽 (1) : 나 ───── -->
+  <aside class="about">
+    <div class="about-inner">
+      <div class="philosophy">
+        <h2 data-k="profile.title"></h2>
+        <p class="sub" data-k="profile.sub"></p>
+        <p class="body" data-k="profile.body"></p>
+      </div>
+
+      <div class="profile">
+        <div class="photo img" id="photo" data-img="profile.photo"></div>
+        <div class="who">
+          <h1 data-k="profile.name"></h1>
+          <p class="job" data-k="profile.job"></p>
+          <p class="school" data-k="profile.school"></p>
+          <p class="dept" data-k="profile.dept"></p>
+          <div class="contact">
+            <h3>Contact</h3>
+            <div class="row">
+              <div class="c-item" id="tel"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span data-k="profile.phone"></span></div>
+              <div class="c-item" id="mail"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 6 9 7 9-7"/></svg><span data-k="profile.email"></span></div>
+              <div class="c-item" id="behance" title="Behance 새 창으로 열기"><span class="be-icon">Bē</span><span data-k="profile.behance"></span><span class="go">↗</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <button class="fold" id="fold" aria-label="프로필 열기/닫기"><span class="fold-bg"></span><span class="fold-label">PROFILE</span><span class="eyelet"></span></button>
+  </aside>
+
+  <!-- ───── 오른쪽 (1.618) : 작품 ───── -->
+  <main class="stage" id="stage">
+    <div class="bg" id="bgA"></div>
+    <div class="bg" id="bgB"></div>
+    <div class="shade"></div>
+
+    <div class="info" id="info">
+      <p class="count" id="count"></p>
+      <div class="brand"><span class="brand-text" id="brandText" data-k="p.brand"></span><img class="logo" id="logo" alt=""></div>
+      <p class="tagline" data-k="p.tagline"></p>
+      <p class="headline" data-k="p.headline"></p>
+    </div>
+
+    <div class="wheel" id="wheel"></div>
+    <div class="dots" id="dots"></div>
+  </main>
+</div>
+
+<!-- 줌인 레이어 + 프로젝트 상세 -->
+<div class="zoom img" id="zoom"></div>
+<div class="dimmer" id="dimmer"></div>
+<article class="detail" id="detail">
+  <button class="close eyelet" id="close" aria-label="메인으로 (오른쪽으로 당겨 닫기)"></button>
+  <!-- 스크롤 표시: 내려갈수록 낚싯줄이 풀려 바늘이 내려감 (끌어서 스크롤도 됨) -->
+  <div class="d-reel" id="dReel"><div class="d-reel-line" id="dReelLine"></div><svg class="d-reel-hook" viewBox="150 236 114 156" aria-hidden="true"><path d="M240 340 A40 40 0 1 1 200 300 L200 278" fill="none" stroke="#2563eb" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><circle cx="200" cy="250" r="9" fill="#2563eb"/><polygon points="240,314 226,345 254,345" fill="#2563eb"/></svg></div>
+  <div id="detailBody"></div>
+</article>
+
+<!-- 편집 -->
+<button class="edit-toggle" id="editToggle">✎ 편집</button>
+<div class="toolbar" id="toolbar">
+  <span class="tb-handle" id="tbHandle" title="드래그해서 옮기기">⠿</span>
+  <span class="tb-label">이 작품</span>
+  <button data-act="thumb">썸네일 사진</button>
+  <button data-act="bg">배경 사진</button>
+  <button data-act="hero" title="상세 페이지 맨 위 큰 사진 (없으면 배경 사진을 씀)">상세 사진</button>
+  <span class="seg"><span class="seg-label">로고</span><button data-act="logoText">글자</button><button data-act="logoImg">사진</button></span>
+  <button data-act="logoPick">로고 사진 바꾸기</button>
+  <button data-act="up">↑ 앞으로</button>
+  <button data-act="down">↓ 뒤로</button>
+  <button data-act="del" class="danger">삭제</button>
+  <span class="tb-sep"></span>
+  <span class="font-ctl off" id="fontCtl">
+    <span class="seg"><span class="seg-label">글꼴</span><button data-act="fontP">Pretendard</button><button data-act="fontI" style="font-family: Impact, 'Anton', sans-serif">Impact</button></span>
+    <span class="seg wt"><span class="seg-label">굵기</span><select id="weight"><option value="100" style="font-weight:100">Thin</option><option value="200" style="font-weight:200">ExtraLight</option><option value="300" style="font-weight:300">Light</option><option value="400" style="font-weight:400">Regular</option><option value="500" style="font-weight:500">Medium</option><option value="600" style="font-weight:600">SemiBold</option><option value="700" style="font-weight:700">Bold</option><option value="800" style="font-weight:800">ExtraBold</option><option value="900" style="font-weight:900">Black</option></select></span>
+    <span class="seg clr"><span class="seg-label">색</span><input type="color" id="colorPick" title="색 고르기"><input id="colorHex" maxlength="7" placeholder="#2b2b2b" spellcheck="false" autocomplete="off" title="예: ffffff 또는 #2563eb"><button data-act="colorReset" title="기본 색으로">↺</button></span>
+  </span>  <span class="tb-sep"></span>
+  <button data-act="add">+ 작품 추가</button>
+  <button data-act="syncAll" title="이 작품의 상세 페이지 섹션 구성을 모든 작품에 맞춤">구성 전체 적용</button>
+  <span class="tb-sep"></span>
+  <button data-act="export">파일로 저장</button>
+  <button data-act="reset" class="danger">처음으로</button>
+  <button data-act="done" class="primary">완료</button>
+</div>
+<div class="toast" id="toast"></div>
+<input type="file" id="picker" accept="image/*" hidden>
+
+<script src="content.js"></script>
+<script src="main.js"></script>
+<script src="intro.js"></script>
+<script src="cursor.js"></script>
+</body>
+</html>
